@@ -1,0 +1,91 @@
+.sky {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition:
+    opacity 2s linear,
+    background 90s linear,
+    filter 90s linear;
+}
+
+.sky-a {
+  z-index: 1;
+}
+
+.sky-b {
+  z-index: 2;
+}
+
+.sky.sunrise {
+  background:
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(255, 210, 120, 0.55) 0%,
+      rgba(255, 170, 90, 0.25) 25%,
+      transparent 45%
+    ),
+    linear-gradient(
+      to bottom,
+      #35275f 0%,
+      #6d4a9a 20%,
+      #d57b63 55%,
+      #ffdcb4 100%
+    );
+}
+
+.sky.morning {
+  background:
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(255, 255, 230, 0.25) 0%,
+      transparent 45%
+    ),
+    linear-gradient(to bottom, #6cb9ff 0%, #8fd2ff 40%, #dff5ff 100%);
+}
+
+.sky.midday {
+  background: linear-gradient(to bottom, #2f9fff 0%, #7ec8ff 45%, #eefaff 100%);
+}
+
+.sky.afternoon {
+  background: linear-gradient(to bottom, #56a9ff 0%, #8dcfff 35%, #ffe2ba 100%);
+}
+
+.sky.sunset {
+  background:
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(255, 160, 80, 0.6) 0%,
+      rgba(255, 110, 60, 0.3) 30%,
+      transparent 50%
+    ),
+    linear-gradient(
+      to bottom,
+      #281b52 0%,
+      #6f3f8d 30%,
+      #ff7b4f 70%,
+      #ffd39b 100%
+    );
+}
+
+.sky.dusk {
+  background: linear-gradient(
+    to bottom,
+    #111f4d 0%,
+    #46356e 40%,
+    #b26d66 75%,
+    #efbb84 100%
+  );
+}
+
+.sky.night {
+  background: linear-gradient(to bottom, #041226 0%, #0f2242 45%, #1b355c 100%);
+}
+
+.sky.midnight {
+  background: linear-gradient(to bottom, #020814 0%, #071326 50%, #0d2140 100%);
+}
+
+.sky.deepnight {
+  background: linear-gradient(to bottom, #000206 0%, #010814 45%, #041122 100%);
+}

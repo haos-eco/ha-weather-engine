@@ -1,0 +1,27 @@
+.debug {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    z-index: 99;
+    width: 280px;
+    color: white;
+    font: 14px/1.5 monospace;
+    padding: 14px;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(14px);
+}
+
+.debug input {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.debug button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}

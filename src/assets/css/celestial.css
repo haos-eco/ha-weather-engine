@@ -1,0 +1,66 @@
+.scene {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: #000;
+}
+
+.sun {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 999px;
+    background: radial-gradient(
+            circle,
+            #fff8cf 0%,
+            #ffd66d 38%,
+            rgba(255, 170, 70, 0.45) 62%,
+            transparent 72%
+    );
+    transform: translate(-50%, -50%);
+    filter: blur(0.2px);
+    box-shadow:
+            0 0 45px rgba(255, 210, 90, 0.75),
+            0 0 120px rgba(255, 150, 60, 0.35);
+    z-index: 5;
+    transition:
+            left 2s linear,
+            top 2s linear,
+            opacity 2s linear;
+}
+
+.moon {
+    position: absolute;
+    left: 74%;
+    top: 18%;
+    width: 96px;
+    height: 96px;
+    border-radius: 999px;
+    background:
+            radial-gradient(circle at 35% 35%, #ffffff 0%, #d9e8ff 42%, #7d91bd 100%);
+    box-shadow:
+            0 0 35px rgba(190, 215, 255, 0.7),
+            0 0 110px rgba(120, 160, 255, 0.25);
+    z-index: 4;
+    transition: opacity 2s linear;
+}
+
+.stars {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background-image:
+            radial-gradient(circle, rgba(255,255,255,.95) 0 1px, transparent 1.4px),
+            radial-gradient(circle, rgba(255,255,255,.7) 0 1px, transparent 1.5px),
+            radial-gradient(circle, rgba(255,255,255,.45) 0 1px, transparent 1.3px);
+    background-size:
+            180px 180px,
+            260px 260px,
+            340px 340px;
+    background-position:
+            10px 20px,
+            120px 80px,
+            40px 160px;
+    pointer-events: none;
+    transition: opacity 2s linear;
+}
