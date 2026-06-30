@@ -16,6 +16,12 @@ export type WeatherVariant =
     | 'fog'
     | 'storm'
 
+export type Timeline = {
+    from: Phase
+    to: Phase
+    progress: number
+}
+
 export type WeatherScene = {
     variant: WeatherVariant
     isWindy: boolean
@@ -31,32 +37,26 @@ export type SunPosition = {
     opacity: number
 }
 
-export type Timeline = {
-    from: Phase
-    to: Phase
-    progress: number
+export type Background = {
+    fromSrc: string
+    toSrc: string
 }
 
-export interface Scene {
-    phase: Phase
-    weather: WeatherVariant
-    timeline: {
-        from: Phase
-        to: Phase
-        progress: number
-    }
-    sky: {
-        filter: string
-    }
-    sun: {
-        x: number
-        y: number
-        opacity: number
-    }
-    moon: {
-        opacity: number
-    }
-    stars: {
-        opacity: number
-    }
+export type Moon = {
+    opacity: number
 }
+
+export type Stars = {
+    opacity: number
+}
+
+export type Scene = {
+    phase: Phase
+    timeline: Timeline
+    weather: WeatherScene
+    background: Background
+    sun: SunPosition
+    moon: Moon
+    stars: Stars
+}
+

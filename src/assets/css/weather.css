@@ -1,0 +1,19 @@
+.weather-dry .sky {
+    filter: brightness(1) contrast(1) saturate(1);
+}
+
+.weather-cloudy .sky {
+    filter: brightness(.88) contrast(.95) saturate(.82);
+}
+
+.weather-wet .sky {
+    filter: brightness(.82) contrast(1.08) saturate(.9);
+}
+
+.weather-fog .sky {
+    filter: brightness(.95) contrast(.65) saturate(.65);
+}
+
+.weather-storm .sky {
+    filter: brightness(.62) contrast(1.25) saturate(.68) hue-rotate(-8deg);
+}

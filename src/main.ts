@@ -1,25 +1,28 @@
-import './assets/css/sky.css'
-import './assets/css/celestial.css'
-import './assets/css/debug.css'
+import "./assets/css/sky.css";
+import "./assets/css/weather.css";
+import "./assets/css/celestial.css";
+import "./assets/css/background.css";
+import "./assets/css/debug.css";
 
-import { SceneEngine } from './engine/SceneEngine'
-import { simulateDay } from './scene/test'
+import { simulateDay } from "./test";
+import { SceneEngine } from "./engine/SceneEngine";
 
-let hour = 6
-let isPlaying = false
-let interval: number | undefined
+let hour = 6;
+let weather = "sunny";
+let isPlaying = false;
+let interval: number | undefined;
 
 function render() {
-    const simulated = simulateDay(hour)
+  const simulated = simulateDay(hour);
 
-    const scene = SceneEngine.create({
-        elevation: simulated.elevation,
-        azimuth: simulated.azimuth,
-        weather: '',
-    })
+  const scene = SceneEngine.create({
+    elevation: simulated.elevation,
+    azimuth: simulated.azimuth,
+    weather,
+  });
 
-    document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-    <div class="scene">
+  document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+    <div class="scene weather-${scene.weather.variant}">
       <div
         class="sky sky-a ${scene.timeline.from}"
         style="opacity:${1 - scene.timeline.progress};"
@@ -33,21 +36,35 @@ function render() {
       <div
         class="sun"
         style="
-          left:${scene.sun.x}%;
-          top:${scene.sun.y}%;
-          opacity:${scene.sun.opacity};
+          left: ${scene.sun.x}%;
+          top: ${scene.sun.y}%;
+          opacity: ${scene.sun.opacity};
         "
       ></div>
 
       <div
         class="moon"
-        style="opacity:${scene.moon.opacity};"
+        style="opacity: ${scene.moon.opacity};"
       ></div>
 
       <div
         class="stars"
-        style="opacity:${scene.stars.opacity};"
+        style="opacity: ${scene.stars.opacity};"
       ></div>
+
+      <img
+        class="background background-a"
+        src="${scene.background.fromSrc}"
+        style="opacity: ${1 - scene.timeline.progress};"
+        alt=""
+      />
+
+      <img
+        class="background background-b"
+        src="${scene.background.toSrc}"
+        style="opacity: ${scene.timeline.progress};"
+        alt=""
+      />
 
       <div class="debug">
         <strong>Scene Debug</strong><br>
@@ -56,6 +73,8 @@ function render() {
         from: ${scene.timeline.from}<br>
         to: ${scene.timeline.to}<br>
         progress: ${scene.timeline.progress.toFixed(2)}<br>
+        weather: ${weather}<br>
+        variant: ${scene.weather.variant}<br>
         elevation: ${simulated.elevation}<br>
         azimuth: ${simulated.azimuth}<br>
 
@@ -68,40 +87,58 @@ function render() {
           value="${hour}"
         />
 
+        <select id="weather-select">
+          <option value="sunny" ${weather === "sunny" ? "selected" : ""}>sunny</option>
+          <option value="cloudy" ${weather === "cloudy" ? "selected" : ""}>cloudy</option>
+          <option value="partlycloudy" ${weather === "partlycloudy" ? "selected" : ""}>partlycloudy</option>
+          <option value="rainy" ${weather === "rainy" ? "selected" : ""}>rainy</option>
+          <option value="pouring" ${weather === "pouring" ? "selected" : ""}>pouring</option>
+          <option value="fog" ${weather === "fog" ? "selected" : ""}>fog</option>
+          <option value="lightning" ${weather === "lightning" ? "selected" : ""}>lightning</option>
+          <option value="lightning-rainy" ${weather === "lightning-rainy" ? "selected" : ""}>lightning-rainy</option>
+          <option value="windy" ${weather === "windy" ? "selected" : ""}>windy</option>
+        </select>
+
         <button id="play-toggle">
-          ${isPlaying ? 'Pause' : 'Play'}
+          ${isPlaying ? "Pause" : "Play"}
         </button>
       </div>
     </div>
-  `
+  `;
 
-    document
-        .querySelector<HTMLInputElement>('#hour-slider')!
-        .addEventListener('input', event => {
-            const target = event.target as HTMLInputElement
-            hour = Number(target.value)
-            render()
-        })
+  document
+    .querySelector<HTMLInputElement>("#hour-slider")!
+    .addEventListener("input", (event) => {
+      hour = Number((event.target as HTMLInputElement).value);
+      render();
+    });
 
-    document
-        .querySelector<HTMLButtonElement>('#play-toggle')!
-        .addEventListener('click', () => {
-            isPlaying = !isPlaying
+  document
+    .querySelector<HTMLSelectElement>("#weather-select")!
+    .addEventListener("change", (event) => {
+      weather = (event.target as HTMLSelectElement).value;
+      render();
+    });
 
-            if (isPlaying) {
-                interval = window.setInterval(() => {
-                    hour += 0.05
+  document
+    .querySelector<HTMLButtonElement>("#play-toggle")!
+    .addEventListener("click", () => {
+      isPlaying = !isPlaying;
 
-                    if (hour > 24) hour = 0
+      if (interval) {
+        clearInterval(interval);
+        render()
+        return;
+      }
 
-                    render()
-                }, 80)
-            } else if (interval) {
-                clearInterval(interval)
-            }
-
-            render()
-        })
+      if (isPlaying) {
+        interval = setInterval(() => {
+          hour += 0.05;
+          if (hour > 24) hour = 0;
+          render();
+        }, 80);
+      }
+    });
 }
 
-render()
+render();
