@@ -60,3 +60,32 @@ export type Scene = {
     stars: Stars
 }
 
+export type HassState = {
+    state: string;
+    attributes: Record<string, unknown>;
+};
+
+export type Hass = {
+    states: Record<string, HassState>;
+};
+
+export type WeatherSceneCardConfig = {
+    sun_entity?: string;
+    weather_entity?: string;
+    asset_base?: string;
+};
+
+export type WeatherSceneElements = {
+    root: HTMLDivElement;
+    skyA: HTMLDivElement;
+    skyB: HTMLDivElement;
+    bgFrom: HTMLImageElement;
+    bgTo: HTMLImageElement;
+    sun: HTMLDivElement;
+    moon: HTMLDivElement;
+    stars: HTMLDivElement;
+    clouds: HTMLVideoElement;
+    rain: HTMLVideoElement;
+    dog: HTMLVideoElement;
+    cat: HTMLVideoElement;
+};
