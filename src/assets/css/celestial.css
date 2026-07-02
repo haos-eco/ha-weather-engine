@@ -67,19 +67,27 @@
   opacity: 0.75;
   animation:
     stars-twinkle-a 5s ease-in-out infinite,
-    stars-drift 90s linear infinite;
+    stars-drift-a 120s linear infinite;
 }
 
 .stars-layer-b {
   opacity: 0.45;
-  animation: stars-twinkle-b 7s ease-in-out infinite;
-  animation-delay: -2s;
+  animation:
+    stars-twinkle-b 7s ease-in-out infinite,
+    stars-drift-b 160s linear infinite;
+  animation-delay:
+    -2s,
+    -40s;
 }
 
 .stars-layer-c {
   opacity: 0.3;
-  animation: stars-twinkle-c 11s ease-in-out infinite;
-  animation-delay: -5s;
+  animation:
+    stars-twinkle-c 11s ease-in-out infinite,
+    stars-drift-c 220s linear infinite;
+  animation-delay:
+    -5s,
+    -80s;
 }
 
 @keyframes stars-twinkle-a {
@@ -87,7 +95,6 @@
   100% {
     opacity: 0.65;
   }
-
   50% {
     opacity: 1;
   }
@@ -98,11 +105,9 @@
   100% {
     opacity: 0.25;
   }
-
   40% {
     opacity: 0.75;
   }
-
   70% {
     opacity: 0.4;
   }
@@ -113,11 +118,9 @@
   100% {
     opacity: 0.15;
   }
-
   45% {
     opacity: 0.55;
   }
-
   80% {
     opacity: 0.25;
   }
@@ -127,7 +130,6 @@
   from {
     transform: translate3d(0, 0, 0) scale(1.02);
   }
-
   to {
     transform: translate3d(-1%, 0.5%, 0) scale(1.02);
   }
