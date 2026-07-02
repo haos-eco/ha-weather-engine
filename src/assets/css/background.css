@@ -6,7 +6,7 @@
     object-fit: cover;
     pointer-events: none;
     z-index: 20;
-    transition: opacity 2s linear;
+    filter: var(--background-filter);
 }
 
 .background-a {
@@ -25,4 +25,13 @@
     object-fit: cover;
     pointer-events: none;
     z-index: 25;
+    filter: var(--animal-filter);
+}
+
+.sky,
+.background,
+.animal {
+    transition:
+            filter 1200ms ease,
+            opacity 1200ms ease;
 }

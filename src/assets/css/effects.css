@@ -6,4 +6,5 @@
     object-fit: cover;
     pointer-events: none;
     z-index: 30;
+    filter: none;
 }

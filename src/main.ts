@@ -1,5 +1,5 @@
-import "./assets/css/sky.css";
 import "./assets/css/weather.css";
+import "./assets/css/sky.css";
 import "./assets/css/celestial.css";
 import "./assets/css/background.css";
 import "./assets/css/effects.css";

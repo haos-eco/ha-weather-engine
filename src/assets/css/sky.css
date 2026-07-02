@@ -2,10 +2,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  transition:
-    opacity 2s linear,
-    background 90s linear,
-    filter 90s linear;
+  filter: var(--sky-filter);
 }
 
 .sky-a {

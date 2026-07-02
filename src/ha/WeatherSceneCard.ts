@@ -14,17 +14,17 @@ import weatherCss from "../assets/css/weather.css?inline";
 import effectsCss from "../assets/css/effects.css?inline";
 
 const styles = `
+  ${weatherCss}
   ${backgroundCss}
   ${skyCss}
   ${celestialCss}
-  ${weatherCss}
   ${effectsCss}
 `;
 
 const DEFAULT_CONFIG: Required<WeatherSceneCardConfig> = {
   sun_entity: "sun.sun",
   weather_entity: "weather.home",
-  asset_base: "/local/weather-scene/assets",
+  asset_base: "/local/weather-scene/",
 };
 
 class WeatherSceneCard extends HTMLElement {
@@ -346,7 +346,7 @@ class WeatherSceneCard extends HTMLElement {
       return `weather/cat/sleeping/${light}-cat.webm`;
     }
 
-    return `weather/dog/awake/day-cat.webm`;
+    return `weather/cat/awake/day-cat.webm`;
   }
 
   private getLightPhase(scene: Scene) {
