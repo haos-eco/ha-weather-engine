@@ -13,7 +13,6 @@
     width: 96px;
     height: 96px;
     border-radius: 999px;
-    background-image: url('weather/celestial/sun.png');
     background-position: center;
     background-size: 180%;
     pointer-events: none;
@@ -36,7 +35,6 @@
     width: 132px;
     height: 132px;
     border-radius: 999px;
-    background-image: url('weather/celestial/moon.png');
     background-position: center;
     background-size: contain;
     pointer-events: none;

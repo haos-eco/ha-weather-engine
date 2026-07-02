@@ -24,7 +24,7 @@ const styles = `
 const DEFAULT_CONFIG: Required<WeatherSceneCardConfig> = {
   sun_entity: "sun.sun",
   weather_entity: "weather.home",
-  asset_base: "/local/weather-scene/",
+  asset_base: "/local/weather-scene",
 };
 
 class WeatherSceneCard extends HTMLElement {
@@ -238,6 +238,9 @@ class WeatherSceneCard extends HTMLElement {
     moon.style.opacity = String(scene.moon.opacity);
     stars.style.opacity = String(scene.stars.opacity);
 
+    this.setBackgroundImage(sun, "weather/celestial/sun.png");
+    this.setBackgroundImage(moon, "weather/celestial/moon.png");
+    /*this.setBackgroundImage(stars, "weather/overlays/stars.png");*/
     /*this.setVideoSource(clouds, this.getCloudsSrc(scene));*/
     this.setVideoSource(rain, this.getRainSrc(scene));
     this.setVideoSource(dog, this.getDogSrc(scene));
@@ -250,6 +253,15 @@ class WeatherSceneCard extends HTMLElement {
     }
 
     return `${this.config.asset_base}/${src}`;
+  }
+
+  private setBackgroundImage(element: HTMLElement, src: string | null) {
+    if (!src) {
+      element.style.backgroundImage = "none";
+      return;
+    }
+
+    element.style.backgroundImage = `url("${this.asset(src)}")`;
   }
 
   private setVideoSource(video: HTMLVideoElement, src: string | null) {
@@ -320,31 +332,22 @@ class WeatherSceneCard extends HTMLElement {
   }
 
   private getDogSrc(scene: Scene) {
-    const weather = scene.weather.variant;
+    const weather = scene.weather;
     const light = this.getLightPhase(scene);
 
-    if (weather === "storm" || weather === "wet") {
-      return null;
-    }
-
-    if (light !== "day") {
-      return `weather/dog/sleeping/${light}-dog.webm`;
-    }
+    if (weather.isStormy || weather.isRainy) return null;
+    if (light !== "day") return `weather/dog/sleeping/${light}-dog.webm`;
 
     return `weather/dog/awake/day-dog.webm`;
   }
 
   private getCatSrc(scene: Scene) {
-    const weather = scene.weather.variant;
+    const weather = scene.weather;
     const light = this.getLightPhase(scene);
 
-    if (weather === "storm" || weather === "wet") {
-      return null;
-    }
+    if (weather.isStormy || weather.isRainy) return null;
 
-    if (light !== "day") {
-      return `weather/cat/sleeping/${light}-cat.webm`;
-    }
+    if (light !== "day") return `weather/cat/sleeping/${light}-cat.webm`;
 
     return `weather/cat/awake/day-cat.webm`;
   }
@@ -352,10 +355,7 @@ class WeatherSceneCard extends HTMLElement {
   private getLightPhase(scene: Scene) {
     const phase = scene.phase;
 
-    if (phase === "night" || phase === "deepnight" || phase === "midnight") {
-      return "night";
-    }
-
+    if (phase === "night" || phase === "deepnight" || phase === "midnight") return "night";
     if (
       phase === "sunrise" ||
       phase === "sunset" ||
