@@ -2,7 +2,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  filter: var(--sky-filter);
+  filter: var(--sky-weather-filter);
 }
 
 .sky-a {

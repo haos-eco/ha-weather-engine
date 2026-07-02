@@ -1,11 +1,11 @@
 import type { WeatherScene, WeatherVariant } from "../types.ts";
 
 export const getWeatherScene = (weather: string): WeatherScene => {
-    const isStormy = ['lightning', 'lightning-rainy'].includes(weather)
-    const isRainy = ['rainy', 'pouring', 'lightning-rainy'].includes(weather)
-    const isFoggy = weather === 'fog'
     const isWindy = ['windy', 'windy-variant'].includes(weather)
-    const isCloudy = ['cloudy', 'partlycloudy', 'windy', 'windy-variant'].includes(weather)
+    const isCloudy = ['cloudy', 'partlycloudy'].includes(weather)
+    const isRainy = ['rainy', 'pouring', 'lightning-rainy'].includes(weather)
+    const isStormy = ['lightning', 'lightning-rainy'].includes(weather)
+    const isFoggy = weather === 'fog'
 
     let variant: WeatherVariant = 'dry'
 
@@ -17,9 +17,9 @@ export const getWeatherScene = (weather: string): WeatherScene => {
     return {
         variant,
         isWindy,
+        isCloudy,
         isRainy,
         isStormy,
         isFoggy,
-        isCloudy,
     }
 }

@@ -11,13 +11,15 @@ import backgroundCss from "../assets/css/background.css?inline";
 import skyCss from "../assets/css/sky.css?inline";
 import celestialCss from "../assets/css/celestial.css?inline";
 import weatherCss from "../assets/css/weather.css?inline";
+import phaseCss from "../assets/css/phase.css?inline";
 import effectsCss from "../assets/css/effects.css?inline";
 
 const styles = `
-  ${weatherCss}
   ${backgroundCss}
   ${skyCss}
   ${celestialCss}
+  ${weatherCss}
+  ${phaseCss}
   ${effectsCss}
 `;
 
@@ -48,9 +50,7 @@ class WeatherSceneCard extends HTMLElement {
   }
 
   set hass(hass: Hass) {
-    if (!this.elements) {
-      this.mount();
-    }
+    if (!this.elements) this.mount();
 
     const sunEntity = hass.states[this.config.sun_entity];
     const weatherEntity = hass.states[this.config.weather_entity];
@@ -93,7 +93,12 @@ class WeatherSceneCard extends HTMLElement {
         <!-- celestial -->
         <div class="sun"></div>
         <div class="moon"></div>
-        <div class="stars"></div>
+        <div class="stars">
+          <img class="stars-layer stars-layer-a" alt="" />
+          <img class="stars-layer stars-layer-b" alt="" />
+          <img class="stars-layer stars-layer-c" alt="" />
+        </div>  
+        
 
         <!-- clouds -->
         <video
@@ -106,7 +111,7 @@ class WeatherSceneCard extends HTMLElement {
           <source type="video/webm" />
         </video>
 
-        <!-- foreground / balcony / city -->
+        <!-- foreground -->
         <img
           class="background background-a"
           alt=""
@@ -152,20 +157,18 @@ class WeatherSceneCard extends HTMLElement {
 
     this.elements = {
       root: this.getElement<HTMLDivElement>(".scene"),
-
       skyA: this.getElement<HTMLDivElement>(".sky-a"),
       skyB: this.getElement<HTMLDivElement>(".sky-b"),
-
       bgFrom: this.getElement<HTMLImageElement>(".background-a"),
       bgTo: this.getElement<HTMLImageElement>(".background-b"),
-
       sun: this.getElement<HTMLDivElement>(".sun"),
       moon: this.getElement<HTMLDivElement>(".moon"),
       stars: this.getElement<HTMLDivElement>(".stars"),
-
+      starsA: this.getElement<HTMLImageElement>("..stars-layer-a"),
+      starsB: this.getElement<HTMLImageElement>(".stars-layer-b"),
+      starsC: this.getElement<HTMLImageElement>(".stars-layer-c"),
       clouds: this.getElement<HTMLVideoElement>(".clouds-overlay"),
       rain: this.getElement<HTMLVideoElement>(".rain-overlay"),
-
       dog: this.getElement<HTMLVideoElement>(".dog"),
       cat: this.getElement<HTMLVideoElement>(".cat"),
     };
@@ -209,13 +212,21 @@ class WeatherSceneCard extends HTMLElement {
       sun,
       moon,
       stars,
-     /* clouds,*/
+      starsA,
+      starsB,
+      starsC,
+      /* clouds,*/
       rain,
       dog,
       cat,
     } = this.elements;
 
-    root.className = `scene weather-${scene.weather.variant}`;
+    root.className = [
+      "scene",
+      `phase-${scene.phase}`,
+      `weather-${scene.weather.variant}`,
+    ].join(" ");
+
     root.dataset.phase = scene.phase;
     root.dataset.weather = scene.weather.variant;
 
@@ -237,10 +248,12 @@ class WeatherSceneCard extends HTMLElement {
 
     moon.style.opacity = String(scene.moon.opacity);
     stars.style.opacity = String(scene.stars.opacity);
+    starsA.src = this.asset("weather/celestial/stars-a.png");
+    starsB.src = this.asset("weather/celestial/stars-b.png");
+    starsC.src = this.asset("weather/celestial/stars-c.png");
 
     this.setBackgroundImage(sun, "weather/celestial/sun.png");
     this.setBackgroundImage(moon, "weather/celestial/moon.png");
-    /*this.setBackgroundImage(stars, "weather/overlays/stars.png");*/
     /*this.setVideoSource(clouds, this.getCloudsSrc(scene));*/
     this.setVideoSource(rain, this.getRainSrc(scene));
     this.setVideoSource(dog, this.getDogSrc(scene));
@@ -355,15 +368,11 @@ class WeatherSceneCard extends HTMLElement {
   private getLightPhase(scene: Scene) {
     const phase = scene.phase;
 
-    if (phase === "night" || phase === "deepnight" || phase === "midnight") return "night";
-    if (
-      phase === "sunrise" ||
-      phase === "sunset" ||
-      phase === "dusk"
-    ) {
-      return "golden";
+    if (["dusk", "night", "midnight", "deepnight"].includes(phase)) {
+      return "night";
     }
 
+    if (["sunrise", "sunset"].includes(phase)) return "golden";
     return "day";
   }
 }

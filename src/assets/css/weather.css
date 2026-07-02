@@ -1,35 +1,41 @@
 .scene {
-    --sky-filter: brightness(1) contrast(1) saturate(1);
-    --animal-filter: brightness(1) contrast(1) saturate(1);
-    --background-filter: brightness(1) contrast(1) saturate(1);
+    --sky-weather-filter: brightness(1) contrast(1) saturate(1);
+    --animal-weather-filter: brightness(1) contrast(1) saturate(1);
+    --vegetation-weather-filter: brightness(1) contrast(1) saturate(1);
+    --foreground-weather-filter: brightness(1) contrast(1) saturate(1);
 }
 
 .weather-dry {
-    --sky-filter: brightness(1) contrast(1) saturate(1);
-    --animal-filter: brightness(1) contrast(1) saturate(1);
-    --background-filter: brightness(1) contrast(1) saturate(1);
+    --sky-weather-filter: brightness(1) contrast(1) saturate(1);
+    --animal-weather-filter: brightness(1) contrast(1) saturate(1);
+    --vegetation-weather-filter: brightness(1) contrast(1) saturate(1);
+    --foreground-weather-filter: brightness(1) contrast(1) saturate(1);
 }
 
 .weather-cloudy {
-    --sky-filter: brightness(.88) contrast(.95) saturate(.82);
-    --animal-filter: brightness(.9) contrast(.95) saturate(.85);
-    --background-filter: brightness(.9) contrast(.95) saturate(.88);
+    --sky-weather-filter: brightness(.88) contrast(.95) saturate(.82);
+    --animal-weather-filter: brightness(.9) contrast(.95) saturate(.86);
+    --vegetation-weather-filter: brightness(.86) contrast(.96) saturate(.78);
+    --foreground-weather-filter: brightness(.9) contrast(.95) saturate(.85);
 }
 
 .weather-wet {
-    --sky-filter: brightness(.82) contrast(1.08) saturate(.9);
-    --animal-filter: brightness(.82) contrast(1.05) saturate(.88);
-    --background-filter: brightness(.84) contrast(1.06) saturate(.9);
+    --sky-weather-filter: brightness(.82) contrast(1.08) saturate(.9);
+    --animal-weather-filter: brightness(.82) contrast(1.05) saturate(.84);
+    --vegetation-weather-filter: brightness(.78) contrast(1.08) saturate(.78);
+    --foreground-weather-filter: brightness(.82) contrast(1.06) saturate(.86);
 }
 
 .weather-fog {
-    --sky-filter: brightness(.95) contrast(.65) saturate(.65);
-    --animal-filter: brightness(.92) contrast(.75) saturate(.7);
-    --background-filter: brightness(.94) contrast(.72) saturate(.7);
+    --sky-weather-filter: brightness(.95) contrast(.65) saturate(.65);
+    --animal-weather-filter: brightness(.86) contrast(.72) saturate(.66);
+    --vegetation-weather-filter: brightness(.82) contrast(.68) saturate(.58);
+    --foreground-weather-filter: brightness(.9) contrast(.7) saturate(.64);
 }
 
 .weather-storm {
-    --sky-filter: brightness(.62) contrast(1.25) saturate(.68) hue-rotate(-8deg);
-    --animal-filter: brightness(.66) contrast(1.12) saturate(.72) hue-rotate(-6deg);
-    --background-filter: brightness(.68) contrast(1.15) saturate(.75) hue-rotate(-6deg);
+    --sky-weather-filter: brightness(.62) contrast(1.25) saturate(.68) hue-rotate(-8deg);
+    --animal-weather-filter: brightness(.62) contrast(1.12) saturate(.68) hue-rotate(-6deg);
+    --vegetation-weather-filter: brightness(.55) contrast(1.18) saturate(.58) hue-rotate(-8deg);
+    --foreground-weather-filter: brightness(.64) contrast(1.15) saturate(.7) hue-rotate(-6deg);
 }

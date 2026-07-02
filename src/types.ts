@@ -84,6 +84,9 @@ export type WeatherSceneElements = {
     sun: HTMLDivElement;
     moon: HTMLDivElement;
     stars: HTMLDivElement;
+    starsA: HTMLImageElement;
+    starsB: HTMLImageElement;
+    starsC: HTMLImageElement;
     clouds: HTMLVideoElement;
     rain: HTMLVideoElement;
     dog: HTMLVideoElement;
