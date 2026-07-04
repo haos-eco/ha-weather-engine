@@ -77,6 +77,7 @@ export type WeatherSceneCardConfig = {
     sun_entity?: string;
     weather_entity?: string;
     asset_base?: string;
+    asset_version?: string;
 };
 
 export type WeatherSceneElements = {

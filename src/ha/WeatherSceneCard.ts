@@ -27,6 +27,7 @@ const DEFAULT_CONFIG: Required<WeatherSceneCardConfig> = {
   sun_entity: "sun.sun",
   weather_entity: "weather.home",
   asset_base: "/local/weather-scene",
+  asset_version: "1",
 };
 
 class WeatherSceneCard extends HTMLElement {
@@ -262,11 +263,16 @@ class WeatherSceneCard extends HTMLElement {
   }
 
   private asset(src: string) {
-    if (src.startsWith("/") || src.startsWith("http")) {
-      return src;
-    }
+    const url =
+        src.startsWith("/") || src.startsWith("http")
+            ? src
+            : `${this.config.asset_base}/${src}`;
 
-    return `${this.config.asset_base}/${src}`;
+    const version = this.config.asset_version;
+    if (!version) return url;
+
+    const separator = url.includes("?") ? "&" : "?";
+    return `${url}${separator}v=${encodeURIComponent(version)}`;
   }
 
   private setBackgroundImage(element: HTMLElement, src: string | null) {
