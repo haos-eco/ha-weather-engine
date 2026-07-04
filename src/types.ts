@@ -31,16 +31,20 @@ export type WeatherScene = {
     isCloudy: boolean
 }
 
+export type Background = {
+    fromSrc: string
+    toSrc: string
+}
+
 export type SunPosition = {
     x: number
     y: number
     opacity: number
 }
 
-export type Background = {
-    fromSrc: string
-    toSrc: string
-}
+export type Sun = {
+    scale?: number
+} & SunPosition
 
 export type Moon = {
     opacity: number
@@ -55,7 +59,7 @@ export type Scene = {
     timeline: Timeline
     weather: WeatherScene
     background: Background
-    sun: SunPosition
+    sun: Sun
     moon: Moon
     stars: Stars
 }

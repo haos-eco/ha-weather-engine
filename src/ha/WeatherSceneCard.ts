@@ -195,7 +195,7 @@ class WeatherSceneCard extends HTMLElement {
       from: scene.background.fromSrc,
       to: scene.background.toSrc,
       progress,
-      sun: scene.sun,
+      sun: `${scene.sun.y}-${scene.sun.x}`,
       moonOpacity: scene.moon.opacity,
       starsOpacity: scene.stars.opacity,
     });
@@ -245,6 +245,7 @@ class WeatherSceneCard extends HTMLElement {
     sun.style.left = `${scene.sun.x}%`;
     sun.style.top = `${scene.sun.y}%`;
     sun.style.opacity = String(scene.sun.opacity ?? 1 - scene.moon.opacity);
+    sun.style.setProperty("--sun-scale", String(scene.sun.scale));
 
     moon.style.opacity = String(scene.moon.opacity);
     stars.style.opacity = String(scene.stars.opacity);
