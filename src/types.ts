@@ -92,3 +92,17 @@ export type WeatherSceneElements = {
     dog: HTMLVideoElement;
     cat: HTMLVideoElement;
 };
+
+export type WeatherSceneElement = HTMLElement & {
+    setConfig: (config: WeatherSceneCardConfig) => void;
+    hass: Hass;
+};
+
+export type Simulation = {
+    label: string;
+    elevation: number;
+    azimuth: number;
+    weather: string;
+    windSpeed?: number;
+    windSpeedUnit?: string;
+};

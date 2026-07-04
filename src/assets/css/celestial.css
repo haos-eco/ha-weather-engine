@@ -10,13 +10,13 @@
 
 .sun {
   position: absolute;
-  width: 96px;
-  height: 96px;
+  width: 56px;
+  height: 56px;
   border-radius: 999px;
   background-position: center;
   background-size: 180%;
   pointer-events: none;
-  transform: translate(-50%, -90%);
+  transform: translate(-50%, -50%);
   filter: blur(0.6px);
   box-shadow:
     0 0 45px rgba(255, 210, 90, 0.75),

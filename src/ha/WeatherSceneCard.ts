@@ -164,7 +164,7 @@ class WeatherSceneCard extends HTMLElement {
       sun: this.getElement<HTMLDivElement>(".sun"),
       moon: this.getElement<HTMLDivElement>(".moon"),
       stars: this.getElement<HTMLDivElement>(".stars"),
-      starsA: this.getElement<HTMLImageElement>("..stars-layer-a"),
+      starsA: this.getElement<HTMLImageElement>(".stars-layer-a"),
       starsB: this.getElement<HTMLImageElement>(".stars-layer-b"),
       starsC: this.getElement<HTMLImageElement>(".stars-layer-c"),
       clouds: this.getElement<HTMLVideoElement>(".clouds-overlay"),
