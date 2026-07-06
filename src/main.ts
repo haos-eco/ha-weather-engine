@@ -163,10 +163,10 @@ function applySimulation(simulation: Simulation) {
     {
       simulation,
       localAssetExamples: {
-        background: "/weather/backgrounds/midday/dry.png",
-        sun: "/weather/celestial/sun.png",
-        moon: "/weather/celestial/moon.png",
-        starsA: "/weather/celestial/stars-a.png",
+        background: "/weather/backgrounds/midday/dry.webp",
+        sun: "/weather/celestial/sun.webp",
+        moon: "/weather/celestial/moon.webp",
+        starsA: "/weather/celestial/stars-a.webp",
         dog: "/weather/dog/awake/day-dog.webm",
         cat: "/weather/cat/awake/day-cat.webm",
         rainLight: "/weather/effects/rain/light.webm",

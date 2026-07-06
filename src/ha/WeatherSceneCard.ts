@@ -250,12 +250,12 @@ class WeatherSceneCard extends HTMLElement {
 
     moon.style.opacity = String(scene.moon.opacity);
     stars.style.opacity = String(scene.stars.opacity);
-    starsA.src = this.asset("weather/celestial/stars-a.png");
-    starsB.src = this.asset("weather/celestial/stars-b.png");
-    starsC.src = this.asset("weather/celestial/stars-c.png");
+    starsA.src = this.asset("weather/celestial/stars-a.webp");
+    starsB.src = this.asset("weather/celestial/stars-b.webp");
+    starsC.src = this.asset("weather/celestial/stars-c.webp");
 
-    this.setBackgroundImage(sun, "weather/celestial/sun.png");
-    this.setBackgroundImage(moon, "weather/celestial/moon.png");
+    this.setBackgroundImage(sun, "weather/celestial/sun.webp");
+    this.setBackgroundImage(moon, "weather/celestial/moon.webp");
     /*this.setVideoSource(clouds, this.getCloudsSrc(scene));*/
     this.setVideoSource(rain, this.getRainSrc(scene));
     this.setVideoSource(dog, this.getDogSrc(scene));
