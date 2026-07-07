@@ -40,15 +40,15 @@
 
 /* wall / floor spill */
 .lamp-spill {
-  top: 19%;
-  left: 6%;
+  top: 10%;
+  left: 0;
   z-index: 46;
   filter: blur(0.4px);
 }
 
 /* lower floor / pets / plants wash */
 .lamp-wash {
-  left: 3%;
+  left: 0;
   top: 17%;
   z-index: 62;
   filter: blur(0.2px);
