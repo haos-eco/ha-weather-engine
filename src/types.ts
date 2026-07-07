@@ -92,10 +92,13 @@ export type WeatherSceneElements = {
     starsA: HTMLImageElement;
     starsB: HTMLImageElement;
     starsC: HTMLImageElement;
-    clouds: HTMLVideoElement;
-    rain: HTMLVideoElement;
     dog: HTMLVideoElement;
     cat: HTMLVideoElement;
+    clouds: HTMLVideoElement;
+    lampBloom: HTMLImageElement;
+    lampSpill: HTMLImageElement;
+    lampWash: HTMLImageElement;
+    rain: HTMLVideoElement;
 };
 
 export type WeatherSceneElement = HTMLElement & {

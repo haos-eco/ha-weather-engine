@@ -121,6 +121,12 @@ class WeatherSceneCard extends HTMLElement {
           class="background background-b"
           alt=""
         />
+        
+        <!-- lamp light passes -->
+        <img class="lamp-pass lamp-bloom" alt="" />
+        <img class="lamp-pass lamp-spill" alt="" />
+        
+        <!-- vegetation, if you have it -->
 
         <!-- dog and cat -->
         <video
@@ -142,6 +148,9 @@ class WeatherSceneCard extends HTMLElement {
         >
           <source type="video/webm" />
         </video>
+        
+        <!-- warm wash over pets/floor -->
+        <img class="lamp-pass lamp-wash" alt="" />
 
         <!-- weather effects -->
         <video
@@ -169,9 +178,12 @@ class WeatherSceneCard extends HTMLElement {
       starsB: this.getElement<HTMLImageElement>(".stars-layer-b"),
       starsC: this.getElement<HTMLImageElement>(".stars-layer-c"),
       clouds: this.getElement<HTMLVideoElement>(".clouds-overlay"),
-      rain: this.getElement<HTMLVideoElement>(".rain-overlay"),
       dog: this.getElement<HTMLVideoElement>(".dog"),
       cat: this.getElement<HTMLVideoElement>(".cat"),
+      lampBloom: this.getElement<HTMLImageElement>(".lamp-bloom"),
+      lampSpill: this.getElement<HTMLImageElement>(".lamp-spill"),
+      lampWash: this.getElement<HTMLImageElement>(".lamp-wash"),
+      rain: this.getElement<HTMLVideoElement>(".rain-overlay"),
     };
   }
 
@@ -217,15 +229,23 @@ class WeatherSceneCard extends HTMLElement {
       starsB,
       starsC,
       /* clouds,*/
-      rain,
       dog,
       cat,
+      rain,
+      lampBloom,
+      lampSpill,
+      lampWash,
     } = this.elements;
+
+    const lampOn = ["dusk", "night", "midnight", "deepnight"].includes(
+      scene.phase,
+    );
 
     root.className = [
       "scene",
       `phase-${scene.phase}`,
       `weather-${scene.weather.variant}`,
+      lampOn ? "lamp-on" : "",
     ].join(" ");
 
     root.dataset.phase = scene.phase;
@@ -254,19 +274,23 @@ class WeatherSceneCard extends HTMLElement {
     starsB.src = this.asset("weather/celestial/stars-b.webp");
     starsC.src = this.asset("weather/celestial/stars-c.webp");
 
+    lampBloom.src = this.asset("weather/effects/lamp/lamp-bloom.webp");
+    lampSpill.src = this.asset("weather/effects/lamp/lamp-spill.webp");
+    lampWash.src = this.asset("weather/effects/lamp/lamp-wash.webp");
+
     this.setBackgroundImage(sun, "weather/celestial/sun.webp");
     this.setBackgroundImage(moon, "weather/celestial/moon.webp");
     /*this.setVideoSource(clouds, this.getCloudsSrc(scene));*/
-    this.setVideoSource(rain, this.getRainSrc(scene));
     this.setVideoSource(dog, this.getDogSrc(scene));
     this.setVideoSource(cat, this.getCatSrc(scene));
+    this.setVideoSource(rain, this.getRainSrc(scene));
   }
 
   private asset(src: string) {
     const url =
-        src.startsWith("/") || src.startsWith("http")
-            ? src
-            : `${this.config.asset_base}/${src}`;
+      src.startsWith("/") || src.startsWith("http")
+        ? src
+        : `${this.config.asset_base}/${src}`;
 
     const version = this.config.asset_version;
     if (!version) return url;

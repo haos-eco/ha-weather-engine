@@ -1,10 +1,184 @@
 .rain-overlay {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: none;
-    z-index: 30;
-    filter: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 30;
+  filter: none;
+}
+
+.lamp-pass {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  pointer-events: none;
+
+  opacity: 0;
+  transition:
+    opacity 1200ms ease,
+    filter 1200ms ease;
+
+  mix-blend-mode: screen;
+  will-change: opacity;
+
+  z-index: 45;
+}
+
+/* small glow around lantern */
+.lamp-bloom {
+  top: -3%;
+  left: -7%;
+  z-index: 48;
+  filter: blur(0.2px);
+}
+
+/* wall / floor spill */
+.lamp-spill {
+  top: 19%;
+  left: 6%;
+  z-index: 46;
+  filter: blur(0.4px);
+}
+
+/* lower floor / pets / plants wash */
+.lamp-wash {
+  left: 3%;
+  top: 17%;
+  z-index: 62;
+  filter: blur(0.2px);
+}
+
+.phase-dusk.lamp-on .lamp-bloom {
+  opacity: 0.64;
+  animation: lamp-bloom-flicker 5.4s ease-in-out infinite;
+}
+
+.phase-dusk.lamp-on .lamp-spill {
+    opacity: 0.34;
+    animation: lamp-spill-breathe 8s ease-in-out infinite;
+}
+
+.phase-dusk.lamp-on .lamp-wash {
+    opacity: 0.15;
+    animation: lamp-wash-breathe 10.5s ease-in-out infinite;
+}
+
+.phase-night.lamp-on .lamp-bloom,
+.phase-midnight.lamp-on .lamp-bloom,
+.phase-deepnight.lamp-on .lamp-bloom {
+  opacity: 0.72;
+  animation: lamp-bloom-flicker 4.8s ease-in-out infinite;
+}
+
+.phase-night.lamp-on .lamp-spill,
+.phase-midnight.lamp-on .lamp-spill,
+.phase-deepnight.lamp-on .lamp-spill {
+    opacity: 0.40;
+    animation: lamp-spill-breathe 7.6s ease-in-out infinite;
+}
+
+.phase-night.lamp-on .lamp-wash,
+.phase-midnight.lamp-on .lamp-wash,
+.phase-deepnight.lamp-on .lamp-wash {
+    opacity: 0.18;
+    animation: lamp-wash-breathe 10s ease-in-out infinite;
+}
+
+/* Rain/storm should reduce warm lamp impact */
+.weather-wet.lamp-on .lamp-bloom,
+.weather-storm.lamp-on .lamp-bloom {
+  opacity: 0.62;
+  animation-duration: 5.8s;
+}
+
+.weather-wet.lamp-on .lamp-spill,
+.weather-storm.lamp-on .lamp-spill {
+  opacity: 0.3;
+  animation-duration: 8.5s;
+}
+
+.weather-wet.lamp-on .lamp-wash,
+.weather-storm.lamp-on .lamp-wash {
+  opacity: 0.14;
+}
+
+/* Fog diffuses lamp light more */
+.weather-fog.lamp-on .lamp-bloom {
+  opacity: 0.68;
+  filter: blur(1.5px);
+  animation: lamp-bloom-flicker 7s ease-in-out infinite;
+}
+
+.weather-fog.lamp-on .lamp-spill {
+  opacity: 0.38;
+  filter: blur(2px);
+}
+
+.weather-fog.lamp-on .lamp-wash {
+  opacity: 0.2;
+  filter: blur(1.5px);
+}
+
+@keyframes lamp-bloom-flicker {
+  0% {
+    opacity: 0.72;
+    filter: brightness(0.98) blur(0.2px);
+  }
+
+  18% {
+    opacity: 0.82;
+    filter: brightness(1.04) blur(0.25px);
+  }
+
+  31% {
+    opacity: 0.76;
+    filter: brightness(1) blur(0.2px);
+  }
+
+  52% {
+    opacity: 0.86;
+    filter: brightness(1.07) blur(0.3px);
+  }
+
+  73% {
+    opacity: 0.78;
+    filter: brightness(1.02) blur(0.2px);
+  }
+
+  100% {
+    opacity: 0.72;
+    filter: brightness(0.98) blur(0.2px);
+  }
+}
+
+@keyframes lamp-spill-breathe {
+  0%,
+  100% {
+    opacity: 0.36;
+    filter: brightness(0.98) blur(0.4px);
+  }
+
+  50% {
+    opacity: 0.46;
+    filter: brightness(1.04) blur(0.6px);
+  }
+}
+
+@keyframes lamp-wash-breathe {
+  0%,
+  100% {
+    opacity: 0.16;
+    filter: brightness(0.98) blur(0.2px);
+  }
+
+  50% {
+    opacity: 0.22;
+    filter: brightness(1.03) blur(0.3px);
+  }
 }

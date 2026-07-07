@@ -32,12 +32,22 @@
 }
 
 .animal.dog {
-    bottom: 0;
-    left: 33%;
+  bottom: 0;
+  left: 33%;
 }
 
 .vegetation {
   filter: var(--vegetation-phase-filter) var(--vegetation-weather-filter);
+}
+
+.lamp-on .animal {
+  filter: var(--animal-phase-filter) var(--animal-weather-filter)
+    brightness(1.045) sepia(0.055) saturate(1.04);
+}
+
+.lamp-on .vegetation {
+  filter: var(--vegetation-phase-filter) var(--vegetation-weather-filter)
+    brightness(1.055) sepia(0.075) saturate(1.08);
 }
 
 .sky,
