@@ -1,11 +1,12 @@
+/*
 .scene {
     --animal-phase-filter: brightness(1) contrast(1) saturate(1);
     --vegetation-phase-filter: brightness(1) contrast(1) saturate(1);
     --foreground-phase-filter: brightness(1) contrast(1) saturate(1);
 }
 
-/* SUNRISE */
-/* Warm, soft, slightly golden-pink */
+!* SUNRISE *!
+!* Warm, soft, slightly golden-pink *!
 
 .phase-sunrise {
     --animal-phase-filter: brightness(1.05) contrast(1.02) saturate(1.14) sepia(.08) hue-rotate(-6deg);
@@ -13,8 +14,8 @@
     --foreground-phase-filter: brightness(1.04) contrast(1.02) saturate(1.12) sepia(.08) hue-rotate(-6deg);
 }
 
-/* MORNING */
-/* Bright, clean, slightly fresh */
+!* MORNING *!
+!* Bright, clean, slightly fresh *!
 
 .phase-morning {
     --animal-phase-filter: brightness(1.06) contrast(1.02) saturate(1.06);
@@ -22,8 +23,8 @@
     --foreground-phase-filter: brightness(1.06) contrast(1.02) saturate(1.06);
 }
 
-/* MIDDAY */
-/* Neutral, clear, strongest daylight */
+!* MIDDAY *!
+!* Neutral, clear, strongest daylight *!
 
 .phase-midday {
     --animal-phase-filter: brightness(1.02) contrast(1.01) saturate(1.02);
@@ -31,8 +32,8 @@
     --foreground-phase-filter: brightness(1.02) contrast(1.01) saturate(1.02);
 }
 
-/* AFTERNOON */
-/* Slightly warmer than midday */
+!* AFTERNOON *!
+!* Slightly warmer than midday *!
 
 .phase-afternoon {
     --animal-phase-filter: brightness(1.02) contrast(1.02) saturate(1.07) sepia(.04) hue-rotate(-3deg);
@@ -40,8 +41,8 @@
     --foreground-phase-filter: brightness(1.02) contrast(1.02) saturate(1.06) sepia(.04) hue-rotate(-3deg);
 }
 
-/* SUNSET */
-/* Warm, orange, cinematic */
+!* SUNSET *!
+!* Warm, orange, cinematic *!
 
 .phase-sunset {
     --animal-phase-filter: brightness(.98) contrast(1.06) saturate(1.2) sepia(.18) hue-rotate(-10deg);
@@ -49,8 +50,8 @@
     --foreground-phase-filter: brightness(.98) contrast(1.06) saturate(1.18) sepia(.16) hue-rotate(-9deg);
 }
 
-/* DUSK */
-/* Blue-purple, low light */
+!* DUSK *!
+!* Blue-purple, low light *!
 
 .phase-dusk {
     --animal-phase-filter: brightness(.68) contrast(1.08) saturate(.78) sepia(.04) hue-rotate(10deg);
@@ -58,8 +59,8 @@
     --foreground-phase-filter: brightness(.64) contrast(1.1) saturate(.74) hue-rotate(10deg);
 }
 
-/* NIGHT */
-/* Dark blue but still readable */
+!* NIGHT *!
+!* Dark blue but still readable *!
 
 .phase-night {
     --animal-phase-filter: brightness(.5) contrast(1.1) saturate(.68) hue-rotate(12deg);
@@ -67,8 +68,8 @@
     --foreground-phase-filter: brightness(.46) contrast(1.12) saturate(.64) hue-rotate(12deg);
 }
 
-/* MIDNIGHT */
-/* Deeper blue, less saturation */
+!* MIDNIGHT *!
+!* Deeper blue, less saturation *!
 
 .phase-midnight {
     --animal-phase-filter: brightness(.4) contrast(1.14) saturate(.58) hue-rotate(16deg);
@@ -76,11 +77,11 @@
     --foreground-phase-filter: brightness(.36) contrast(1.16) saturate(.54) hue-rotate(16deg);
 }
 
-/* DEEPNIGHT */
-/* Almost black, but not invisible */
+!* DEEPNIGHT *!
+!* Almost black, but not invisible *!
 
 .phase-deepnight {
     --animal-phase-filter: brightness(.3) contrast(1.18) saturate(.48) hue-rotate(18deg);
     --vegetation-phase-filter: brightness(.24) contrast(1.22) saturate(.4) hue-rotate(20deg);
     --foreground-phase-filter: brightness(.28) contrast(1.2) saturate(.44) hue-rotate(18deg);
-}
+}*/

@@ -109,7 +109,6 @@ app.appendChild(card);
 const debugPanel = createDebugPanel();
 const controls = createControls();
 
-document.body.appendChild(debugPanel);
 document.body.appendChild(controls);
 
 let currentIndex = 0;
@@ -182,6 +181,16 @@ function applySimulation(simulation: Simulation) {
   console.log("Fake hass", hass);
 }
 
+function showDebugPanel() {
+    const debugShown = document.body.querySelector('.debug-panel')
+    if (debugShown) {
+        document.body.removeChild(debugPanel)
+        return
+    }
+
+    document.body.appendChild(debugPanel);
+}
+
 function nextSimulation() {
   currentIndex = (currentIndex + 1) % simulations.length;
   applySimulation(simulations[currentIndex]);
@@ -221,12 +230,13 @@ function createControls() {
   wrapper.style.background = "rgba(0, 0, 0, 0.5)";
   wrapper.style.backdropFilter = "blur(12px)";
 
+  const debugPanel = createButton("Show Debug Panel", showDebugPanel);
   const previousButton = createButton("Prev", previousSimulation);
   const nextButton = createButton("Next", nextSimulation);
   const playButton = createButton("Play", startAutoplay);
   const stopButton = createButton("Stop", stopAutoplay);
 
-  wrapper.append(previousButton, nextButton, playButton, stopButton);
+  wrapper.append(debugPanel, previousButton, nextButton, playButton, stopButton);
 
   return wrapper;
 }
@@ -270,6 +280,7 @@ function createDebugPanel() {
     "12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
   panel.style.lineHeight = "1.45";
   panel.style.pointerEvents = "none";
+  panel.classList.add('debug-panel')
 
   return panel;
 }

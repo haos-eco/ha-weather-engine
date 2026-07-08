@@ -65,7 +65,7 @@
 }
 
 .phase-dusk.lamp-on .lamp-wash {
-    opacity: 0.15;
+    opacity: 0.14;
     animation: lamp-wash-breathe 10.5s ease-in-out infinite;
 }
 
@@ -86,7 +86,7 @@
 .phase-night.lamp-on .lamp-wash,
 .phase-midnight.lamp-on .lamp-wash,
 .phase-deepnight.lamp-on .lamp-wash {
-    opacity: 0.18;
+    opacity: 0.16;
     animation: lamp-wash-breathe 10s ease-in-out infinite;
 }
 
@@ -105,7 +105,7 @@
 
 .weather-wet.lamp-on .lamp-wash,
 .weather-storm.lamp-on .lamp-wash {
-  opacity: 0.14;
+  opacity: 0.12;
 }
 
 /* Fog diffuses lamp light more */
@@ -121,7 +121,7 @@
 }
 
 .weather-fog.lamp-on .lamp-wash {
-  opacity: 0.2;
+  opacity: 0.16;
   filter: blur(1.5px);
 }
 
@@ -173,12 +173,23 @@
 @keyframes lamp-wash-breathe {
   0%,
   100% {
-    opacity: 0.16;
+    opacity: 0.12;
     filter: brightness(0.98) blur(0.2px);
   }
 
   50% {
-    opacity: 0.22;
+    opacity: 0.16;
     filter: brightness(1.03) blur(0.3px);
   }
+}
+
+@media (min-width: 1120px) {
+    .lamp-bloom {
+        top: -3.5%;
+        left: -7.7%;
+    }
+    .lamp-wash {
+        top: 17%;
+        left: 0;
+    }
 }

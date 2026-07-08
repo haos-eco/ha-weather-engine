@@ -59,6 +59,24 @@
     opacity 1400ms ease;
 }
 
+@media (min-width: 1120px) {
+    .animal.cat {
+        right: 28%;
+    }
+    .animal.dog {
+        left: 28%;
+    }
+}
+
+@media (min-width: 1280px) {
+    .animal.cat {
+        right: 31%;
+    }
+    .animal.dog {
+        left: 31%;
+    }
+}
+
 @media (min-width: 1440px) {
     .animal.cat {
     right: 33%;
