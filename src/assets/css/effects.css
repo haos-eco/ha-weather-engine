@@ -53,7 +53,6 @@
   top: -3%;
   left: -7%;
   z-index: 48;
-  filter: blur(0.2px);
 }
 
 /* wall / floor spill */
@@ -61,7 +60,6 @@
   top: 10%;
   left: 0;
   z-index: 46;
-  filter: blur(0.4px);
 }
 
 /* lower floor / pets / plants wash */
@@ -69,19 +67,33 @@
   left: 0;
   top: 17%;
   z-index: 62;
-  filter: blur(0.2px);
 }
 
+.phase-sunrise.lamp-on .lamp-bloom,
+.phase-morning.lamp-on .lamp-bloom,
+.phase-midday.lamp-on .lamp-bloom,
+.phase-afternoon.lamp-on .lamp-bloom,
+.phase-sunset.lamp-on .lamp-bloom,
 .phase-dusk.lamp-on .lamp-bloom {
   opacity: 0.64;
   animation: lamp-bloom-flicker 5.4s ease-in-out infinite;
 }
 
+.phase-sunrise.lamp-on .lamp-spill,
+.phase-morning.lamp-on .lamp-spill,
+.phase-midday.lamp-on .lamp-spill,
+.phase-afternoon.lamp-on .lamp-spill,
+.phase-sunset.lamp-on .lamp-spill,
 .phase-dusk.lamp-on .lamp-spill {
   opacity: 0.34;
   animation: lamp-spill-breathe 8s ease-in-out infinite;
 }
 
+.phase-sunrise.lamp-on .lamp-wash,
+.phase-morning.lamp-on .lamp-wash,
+.phase-midday.lamp-on .lamp-wash,
+.phase-afternoon.lamp-on .lamp-wash,
+.phase-sunset.lamp-on .lamp-wash,
 .phase-dusk.lamp-on .lamp-wash {
   opacity: 0.14;
   animation: lamp-wash-breathe 10.5s ease-in-out infinite;
@@ -129,49 +141,46 @@
 /* Fog diffuses lamp light more */
 .weather-fog.lamp-on .lamp-bloom {
   opacity: 0.68;
-  filter: blur(1.5px);
   animation: lamp-bloom-flicker 7s ease-in-out infinite;
 }
 
 .weather-fog.lamp-on .lamp-spill {
   opacity: 0.38;
-  filter: blur(2px);
 }
 
 .weather-fog.lamp-on .lamp-wash {
   opacity: 0.16;
-  filter: blur(1.5px);
 }
 
 @keyframes lamp-bloom-flicker {
   0% {
     opacity: 0.72;
-    filter: brightness(0.98) blur(0.2px);
+    filter: brightness(0.98);
   }
 
   18% {
     opacity: 0.82;
-    filter: brightness(1.04) blur(0.25px);
+    filter: brightness(1.04) ;
   }
 
   31% {
     opacity: 0.76;
-    filter: brightness(1) blur(0.2px);
+    filter: brightness(1);
   }
 
   52% {
     opacity: 0.86;
-    filter: brightness(1.07) blur(0.3px);
+    filter: brightness(1.07);
   }
 
   73% {
     opacity: 0.78;
-    filter: brightness(1.02) blur(0.2px);
+    filter: brightness(1.02);
   }
 
   100% {
     opacity: 0.72;
-    filter: brightness(0.98) blur(0.2px);
+    filter: brightness(0.98);
   }
 }
 
@@ -179,12 +188,12 @@
   0%,
   100% {
     opacity: 0.36;
-    filter: brightness(0.98) blur(0.4px);
+    filter: brightness(0.98);
   }
 
   50% {
     opacity: 0.46;
-    filter: brightness(1.04) blur(0.6px);
+    filter: brightness(1.04);
   }
 }
 
@@ -192,12 +201,12 @@
   0%,
   100% {
     opacity: 0.12;
-    filter: brightness(0.98) blur(0.2px);
+    filter: brightness(0.98);
   }
 
   50% {
     opacity: 0.16;
-    filter: brightness(1.03) blur(0.3px);
+    filter: brightness(1.03);
   }
 }
 

@@ -34,8 +34,13 @@
   left: 26%;
 }
 
-.vegetation {
-}
+/*.vegetation {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 25;
+    mix-blend-mode: screen;
+}*/
 
 .lamp-on .animal {
   filter: var(--animal-phase-filter) var(--animal-weather-filter)

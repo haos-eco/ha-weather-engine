@@ -24,6 +24,7 @@ const styles = `
 const DEFAULT_CONFIG: Required<WeatherSceneCardConfig> = {
   sun_entity: "sun.sun",
   weather_entity: "weather.home",
+  outdoor_lights_entity: "",
   asset_base: "/local/weather-scene",
   asset_version: "1",
 };
@@ -53,15 +54,23 @@ class WeatherSceneCard extends HTMLElement {
 
     const sunEntity = hass.states[this.config.sun_entity];
     const weatherEntity = hass.states[this.config.weather_entity];
+    const outdoorLightsEntity = hass.states[this.config.outdoor_lights_entity];
 
     const elevation = Number(sunEntity?.attributes?.elevation ?? 0);
     const azimuth = Number(sunEntity?.attributes?.azimuth ?? 180);
     const weather = String(weatherEntity?.state ?? "sunny");
+    const outdoorLights = outdoorLightsEntity?.state?.trim().toLowerCase();
+      const outdoorLightsOn =
+          outdoorLights === "on" ||
+          outdoorLights === "true" ||
+          outdoorLights === "home" ||
+          Number(outdoorLights) > 0;
 
-    const scene = SceneEngine.create({
+      const scene = SceneEngine.create({
       elevation,
       azimuth,
       weather,
+      outdoorLightsOn,
     });
 
     this.applyScene(scene);
@@ -100,7 +109,7 @@ class WeatherSceneCard extends HTMLElement {
         
 
         <!-- clouds -->
-        <video
+        <!--<video
           autoplay
           loop
           muted
@@ -108,7 +117,7 @@ class WeatherSceneCard extends HTMLElement {
           class="clouds-overlay"
         >
           <source type="video/webm" />
-        </video>
+        </video>-->
 
         <!-- foreground -->
         <img
@@ -124,7 +133,16 @@ class WeatherSceneCard extends HTMLElement {
         <img class="lamp-pass lamp-bloom" alt="" />
         <img class="lamp-pass lamp-spill" alt="" />
         
-        <!-- vegetation, if you have it -->
+        <!-- vegetation -->
+       <!-- <video
+          autoplay
+          loop
+          muted
+          playsinline
+          class="vegetation bush"
+        >
+          <source type="video/webm" />
+        </video>-->
 
         <!-- dog and cat -->
         <video
@@ -188,7 +206,8 @@ class WeatherSceneCard extends HTMLElement {
       starsA: this.getElement<HTMLImageElement>(".stars-layer-a"),
       starsB: this.getElement<HTMLImageElement>(".stars-layer-b"),
       starsC: this.getElement<HTMLImageElement>(".stars-layer-c"),
-      clouds: this.getElement<HTMLVideoElement>(".clouds-overlay"),
+      // clouds: this.getElement<HTMLVideoElement>(".clouds-overlay"),
+      // bush: this.getElement<HTMLVideoElement>(".bush"),
       dog: this.getElement<HTMLVideoElement>(".dog"),
       cat: this.getElement<HTMLVideoElement>(".cat"),
       phaseEffect: this.getElement<HTMLImageElement>(".phase-effect"),
@@ -214,7 +233,6 @@ class WeatherSceneCard extends HTMLElement {
     if (!this.elements) return;
 
     const progress = scene.timeline.progress ?? 0;
-
     const sceneKey = JSON.stringify({
       phase: scene.phase,
       weather: scene.weather.variant,
@@ -224,6 +242,7 @@ class WeatherSceneCard extends HTMLElement {
       sun: `${scene.sun.y}-${scene.sun.x}`,
       moonOpacity: scene.moon.opacity,
       starsOpacity: scene.stars.opacity,
+      outdoorLightsOn: scene.outdoorLightsOn,
     });
 
     if (sceneKey === this.lastSceneKey) return;
@@ -242,6 +261,7 @@ class WeatherSceneCard extends HTMLElement {
       starsB,
       starsC,
       /* clouds,*/
+      /*bush,*/
       dog,
       cat,
       phaseEffect,
@@ -252,15 +272,11 @@ class WeatherSceneCard extends HTMLElement {
       lampWash,
     } = this.elements;
 
-    const lampOn = ["dusk", "night", "midnight", "deepnight"].includes(
-      scene.phase,
-    );
-
     root.className = [
       "scene",
       `phase-${scene.phase}`,
       `weather-${scene.weather.variant}`,
-      lampOn ? "lamp-on" : "",
+      scene.outdoorLightsOn ? "lamp-on" : "",
     ].join(" ");
 
     root.dataset.phase = scene.phase;
@@ -307,6 +323,7 @@ class WeatherSceneCard extends HTMLElement {
 
     this.setBackgroundImage(moon, "weather/celestial/moon.webp");
     /*this.setVideoSource(clouds, this.getCloudsSrc(scene));*/
+    /*this.setVideoSource(bush, this.getBushSrc(scene));*/
     this.setVideoSource(dog, this.getDogSrc(scene));
     this.setVideoSource(cat, this.getCatSrc(scene));
     this.setVideoSource(rain, this.getRainSrc(scene));
@@ -487,6 +504,14 @@ class WeatherSceneCard extends HTMLElement {
 
     return null;
   }
+
+  /*private getBushSrc(scene: Scene) {
+    const light = this.getLightPhase(scene);
+
+    if (light !== "night") return `weather/vegetation/day-bush-light.webm`;
+
+    return `weather/vegetation/night-bush-light.webm`;
+  }*/
 
   private getDogSrc(scene: Scene) {
     const weather = scene.weather;

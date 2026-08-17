@@ -11,10 +11,12 @@ export class SceneEngine {
     elevation,
     azimuth,
     weather,
+    outdoorLightsOn,
   }: {
     elevation: number;
     azimuth: number;
     weather: string;
+    outdoorLightsOn: boolean;
   }): Scene {
     const phase = getPhase(elevation, azimuth);
     const timeline = getTimeline(elevation, azimuth);
@@ -27,6 +29,7 @@ export class SceneEngine {
       phase,
       timeline,
       weather: weatherScene,
+      outdoorLightsOn,
       background: {
         fromSrc: getBackgroundSrc(timeline.from, weatherScene.variant),
         toSrc: getBackgroundSrc(timeline.to, weatherScene.variant),

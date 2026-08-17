@@ -59,6 +59,7 @@ export type Scene = {
     timeline: Timeline
     weather: WeatherScene
     background: Background
+    outdoorLightsOn: boolean
     sun: Sun
     moon: Moon
     stars: Stars
@@ -76,6 +77,7 @@ export type Hass = {
 export type WeatherSceneCardConfig = {
     sun_entity?: string;
     weather_entity?: string;
+    outdoor_lights_entity?: string;
     asset_base?: string;
     asset_version?: string;
 };
@@ -92,11 +94,12 @@ export type WeatherSceneElements = {
     starsA: HTMLImageElement;
     starsB: HTMLImageElement;
     starsC: HTMLImageElement;
+    // clouds: HTMLVideoElement;
+    // bush: HTMLVideoElement;
     dog: HTMLVideoElement;
     cat: HTMLVideoElement;
     phaseEffect: HTMLImageElement;
     weatherEffect: HTMLImageElement;
-    clouds: HTMLVideoElement;
     lampBloom: HTMLImageElement;
     lampSpill: HTMLImageElement;
     lampWash: HTMLImageElement;
