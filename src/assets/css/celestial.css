@@ -5,6 +5,7 @@
   min-height: 100vh;
   overflow: hidden;
   background: #000;
+  contain: paint;
   isolation: isolate;
 }
 
@@ -66,15 +67,15 @@
 .stars-layer-a {
   opacity: 0.75;
   animation:
-    stars-twinkle-a 5s ease-in-out infinite,
-    stars-drift-a 120s linear infinite;
+    stars-twinkle-a 2s ease-in-out infinite,
+    stars-drift-a 8s linear infinite;
 }
 
 .stars-layer-b {
   opacity: 0.45;
   animation:
     stars-twinkle-b 7s ease-in-out infinite,
-    stars-drift-b 160s linear infinite;
+    stars-drift-b 14s linear infinite;
   animation-delay:
     -2s,
     -40s;
@@ -83,8 +84,8 @@
 .stars-layer-c {
   opacity: 0.3;
   animation:
-    stars-twinkle-c 11s ease-in-out infinite,
-    stars-drift-c 220s linear infinite;
+    stars-twinkle-c 4s ease-in-out infinite,
+    stars-drift-c 10s linear infinite;
   animation-delay:
     -5s,
     -80s;
