@@ -94,6 +94,8 @@ export type WeatherSceneElements = {
     starsC: HTMLImageElement;
     dog: HTMLVideoElement;
     cat: HTMLVideoElement;
+    phaseEffect: HTMLImageElement;
+    weatherEffect: HTMLImageElement;
     clouds: HTMLVideoElement;
     lampBloom: HTMLImageElement;
     lampSpill: HTMLImageElement;

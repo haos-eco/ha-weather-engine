@@ -1,3 +1,22 @@
+.scene-effect {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.phase-effect {
+  z-index: 26;
+}
+
+.weather-effect {
+  z-index: 27;
+}
+
 .rain-overlay {
   position: absolute;
   inset: 0;
@@ -6,7 +25,6 @@
   object-fit: cover;
   pointer-events: none;
   z-index: 30;
-  filter: none;
 }
 
 .lamp-pass {
@@ -60,13 +78,13 @@
 }
 
 .phase-dusk.lamp-on .lamp-spill {
-    opacity: 0.34;
-    animation: lamp-spill-breathe 8s ease-in-out infinite;
+  opacity: 0.34;
+  animation: lamp-spill-breathe 8s ease-in-out infinite;
 }
 
 .phase-dusk.lamp-on .lamp-wash {
-    opacity: 0.14;
-    animation: lamp-wash-breathe 10.5s ease-in-out infinite;
+  opacity: 0.14;
+  animation: lamp-wash-breathe 10.5s ease-in-out infinite;
 }
 
 .phase-night.lamp-on .lamp-bloom,
@@ -79,15 +97,15 @@
 .phase-night.lamp-on .lamp-spill,
 .phase-midnight.lamp-on .lamp-spill,
 .phase-deepnight.lamp-on .lamp-spill {
-    opacity: 0.40;
-    animation: lamp-spill-breathe 7.6s ease-in-out infinite;
+  opacity: 0.4;
+  animation: lamp-spill-breathe 7.6s ease-in-out infinite;
 }
 
 .phase-night.lamp-on .lamp-wash,
 .phase-midnight.lamp-on .lamp-wash,
 .phase-deepnight.lamp-on .lamp-wash {
-    opacity: 0.16;
-    animation: lamp-wash-breathe 10s ease-in-out infinite;
+  opacity: 0.16;
+  animation: lamp-wash-breathe 10s ease-in-out infinite;
 }
 
 /* Rain/storm should reduce warm lamp impact */
@@ -184,12 +202,12 @@
 }
 
 @media (min-width: 1120px) {
-    .lamp-bloom {
-        top: -3.5%;
-        left: -7.7%;
-    }
-    .lamp-wash {
-        top: 17%;
-        left: 0;
-    }
+  .lamp-bloom {
+    top: -3.5%;
+    left: -7.7%;
+  }
+  .lamp-wash {
+    top: 17%;
+    left: 0;
+  }
 }

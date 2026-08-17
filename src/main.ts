@@ -163,7 +163,6 @@ function applySimulation(simulation: Simulation) {
       simulation,
       localAssetExamples: {
         background: "/weather/backgrounds/midday/dry.webp",
-        sun: "/weather/celestial/sun.webp",
         moon: "/weather/celestial/moon.webp",
         starsA: "/weather/celestial/stars-a.webp",
         dog: "/weather/dog/awake/day-dog.webm",

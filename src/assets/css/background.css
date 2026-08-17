@@ -6,7 +6,6 @@
   object-fit: cover;
   pointer-events: none;
   z-index: 20;
-  filter: var(--foreground-phase-filter) var(--foreground-weather-filter);
 }
 
 .background-a {
@@ -23,7 +22,6 @@
   height: auto;
   pointer-events: none;
   z-index: 25;
-  filter: var(--animal-phase-filter) var(--animal-weather-filter);
 }
 
 .animal.cat {
@@ -37,7 +35,6 @@
 }
 
 .vegetation {
-  filter: var(--vegetation-phase-filter) var(--vegetation-weather-filter);
 }
 
 .lamp-on .animal {

@@ -1,8 +1,10 @@
 import type {
   Hass,
+  Phase,
   Scene,
   WeatherSceneCardConfig,
   WeatherSceneElements,
+  WeatherVariant,
 } from "../types";
 
 import { SceneEngine } from "../engine/SceneEngine";
@@ -10,16 +12,12 @@ import { SceneEngine } from "../engine/SceneEngine";
 import backgroundCss from "../assets/css/background.css?inline";
 import skyCss from "../assets/css/sky.css?inline";
 import celestialCss from "../assets/css/celestial.css?inline";
-import weatherCss from "../assets/css/weather.css?inline";
-import phaseCss from "../assets/css/phase.css?inline";
 import effectsCss from "../assets/css/effects.css?inline";
 
 const styles = `
   ${backgroundCss}
   ${skyCss}
   ${celestialCss}
-  ${weatherCss}
-  ${phaseCss}
   ${effectsCss}
 `;
 
@@ -149,6 +147,19 @@ class WeatherSceneCard extends HTMLElement {
           <source type="video/webm" />
         </video>
         
+        <!-- weather and phases overlays -->
+        <img
+          class="scene-effect phase-effect"
+          alt=""
+          decoding="async"
+        />
+        
+        <img
+          class="scene-effect weather-effect"
+          alt=""
+          decoding="async"
+        />
+        
         <!-- warm wash over pets/floor -->
         <img class="lamp-pass lamp-wash" alt="" />
 
@@ -180,6 +191,8 @@ class WeatherSceneCard extends HTMLElement {
       clouds: this.getElement<HTMLVideoElement>(".clouds-overlay"),
       dog: this.getElement<HTMLVideoElement>(".dog"),
       cat: this.getElement<HTMLVideoElement>(".cat"),
+      phaseEffect: this.getElement<HTMLImageElement>(".phase-effect"),
+      weatherEffect: this.getElement<HTMLImageElement>(".weather-effect"),
       lampBloom: this.getElement<HTMLImageElement>(".lamp-bloom"),
       lampSpill: this.getElement<HTMLImageElement>(".lamp-spill"),
       lampWash: this.getElement<HTMLImageElement>(".lamp-wash"),
@@ -231,6 +244,8 @@ class WeatherSceneCard extends HTMLElement {
       /* clouds,*/
       dog,
       cat,
+      phaseEffect,
+      weatherEffect,
       rain,
       lampBloom,
       lampSpill,
@@ -257,11 +272,23 @@ class WeatherSceneCard extends HTMLElement {
     skyA.style.opacity = String(1 - progress);
     skyB.style.opacity = String(progress);
 
-    bgFrom.src = this.asset(scene.background.fromSrc);
-    bgTo.src = this.asset(scene.background.toSrc);
+    this.setImageSource(bgFrom, scene.background.fromSrc);
+    this.setImageSource(bgTo, scene.background.toSrc);
 
     bgFrom.style.opacity = String(1 - progress);
     bgTo.style.opacity = String(progress);
+
+    this.setEffectImageSource(
+      phaseEffect,
+      this.getPhaseEffectSrc(scene),
+      this.getPhaseEffectOpacity(scene),
+    );
+
+    this.setEffectImageSource(
+      weatherEffect,
+      this.getWeatherEffectSrc(scene),
+      this.getWeatherEffectOpacity(scene),
+    );
 
     sun.style.left = `${scene.sun.x}%`;
     sun.style.top = `${scene.sun.y}%`;
@@ -270,15 +297,14 @@ class WeatherSceneCard extends HTMLElement {
 
     moon.style.opacity = String(scene.moon.opacity);
     stars.style.opacity = String(scene.stars.opacity);
-    starsA.src = this.asset("weather/celestial/stars-a.webp");
-    starsB.src = this.asset("weather/celestial/stars-b.webp");
-    starsC.src = this.asset("weather/celestial/stars-c.webp");
+    this.setImageSource(starsA, "weather/celestial/stars-a.webp");
+    this.setImageSource(starsB, "weather/celestial/stars-b.webp");
+    this.setImageSource(starsC, "weather/celestial/stars-c.webp");
 
-    lampBloom.src = this.asset("weather/effects/lamp/lamp-bloom.webp");
-    lampSpill.src = this.asset("weather/effects/lamp/lamp-spill.webp");
-    lampWash.src = this.asset("weather/effects/lamp/lamp-wash.webp");
+    this.setImageSource(lampBloom, "weather/effects/lamp/lamp-bloom.webp");
+    this.setImageSource(lampSpill, "weather/effects/lamp/lamp-spill.webp");
+    this.setImageSource(lampWash, "weather/effects/lamp/lamp-wash.webp");
 
-    this.setBackgroundImage(sun, "weather/celestial/sun.webp");
     this.setBackgroundImage(moon, "weather/celestial/moon.webp");
     /*this.setVideoSource(clouds, this.getCloudsSrc(scene));*/
     this.setVideoSource(dog, this.getDogSrc(scene));
@@ -345,6 +371,93 @@ class WeatherSceneCard extends HTMLElement {
     void video.play().catch(() => {
       // Muted + playsInline should autoplay, but browsers enjoy petty rebellion.
     });
+  }
+
+  private setImageSource(image: HTMLImageElement, src: string | null) {
+    if (!src) {
+      if (image.hasAttribute("src")) {
+        image.removeAttribute("src");
+      }
+
+      return;
+    }
+
+    const nextSrc = this.asset(src);
+
+    if (image.getAttribute("src") === nextSrc) {
+      return;
+    }
+
+    image.src = nextSrc;
+  }
+
+  private setEffectImageSource(
+    image: HTMLImageElement,
+    src: string | null,
+    opacity: number,
+  ) {
+    if (!src) {
+      image.style.opacity = "0";
+      image.removeAttribute("src");
+      return;
+    }
+
+    this.setImageSource(image, src);
+    image.style.opacity = String(opacity);
+  }
+
+  private getPhaseEffectSrc(scene: Scene) {
+    const phase = scene.phase;
+    const phases = new Set([
+      "sunrise",
+      "afternoon",
+      "sunset",
+      "dusk",
+      "night",
+      "midnight",
+      "deepnight",
+    ]);
+
+    if (!phases.has(phase)) return null;
+
+    return `weather/effects/phase/` + `${phase}.webp`;
+  }
+
+  private getWeatherEffectSrc(scene: Scene) {
+    const variant = scene.weather.variant;
+    const variants = new Set(["cloudy", "wet", "fog", "storm"]);
+
+    if (!variants.has(variant)) return null;
+
+    return `weather/effects/weather/` + `${variant}.webp`;
+  }
+
+  private getPhaseEffectOpacity(scene: Scene) {
+    const phases = {
+      sunrise: 0.16,
+      morning: 0,
+      midday: 0,
+      afternoon: 0.08,
+      sunset: 0.2,
+      dusk: 0.24,
+      night: 0.3,
+      midnight: 0.42,
+      deepnight: 0.52,
+    } satisfies Record<Phase, number>;
+
+    return phases[scene.phase] || 0;
+  }
+
+  private getWeatherEffectOpacity(scene: Scene) {
+    const weather = {
+      dry: 0,
+      cloudy: 0.18,
+      wet: 0.24,
+      fog: 0.28,
+      storm: 0.34,
+    } satisfies Record<WeatherVariant, number>;
+
+    return weather[scene.weather.variant] || 0;
   }
 
   /*private getCloudsSrc(scene: Scene) {
