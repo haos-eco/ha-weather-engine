@@ -39,14 +39,12 @@
     bottom: 0;
     right: 0;
     z-index: 25;
-    will-change: opacity;
 }*/
 
 .sky,
 .background,
 /*.vegetation,*/
 .animal {
-  will-change: opacity;
   transition: opacity 1400ms ease;
 }
 

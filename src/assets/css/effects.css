@@ -34,11 +34,20 @@
   height: 100%;
   object-fit: cover;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 1200ms ease;
-  mix-blend-mode: screen;
-  will-change: opacity;
   z-index: 45;
+  opacity: 0;
+  visibility: hidden;
+  mix-blend-mode: screen;
+  transition:
+    opacity 600ms ease,
+    visibility 0s linear 600ms;
+}
+
+.scene.lamp-on .lamp-pass {
+  visibility: visible;
+  transition:
+    opacity 600ms ease,
+    visibility 0s;
 }
 
 /* small glow around lantern */
