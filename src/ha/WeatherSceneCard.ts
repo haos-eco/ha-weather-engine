@@ -458,7 +458,7 @@ class WeatherSceneCard extends HTMLElement {
       sunset: 0.2,
       dusk: 0.24,
       night: 0.26,
-      midnight: 0.42,
+      midnight: 0.12,
       deepnight: 0.32,
     } satisfies Record<Phase, number>;
 
