@@ -60,13 +60,13 @@ class WeatherSceneCard extends HTMLElement {
     const azimuth = Number(sunEntity?.attributes?.azimuth ?? 180);
     const weather = String(weatherEntity?.state ?? "sunny");
     const outdoorLights = outdoorLightsEntity?.state?.trim().toLowerCase();
-      const outdoorLightsOn =
-          outdoorLights === "on" ||
-          outdoorLights === "true" ||
-          outdoorLights === "home" ||
-          Number(outdoorLights) > 0;
+    const outdoorLightsOn =
+      outdoorLights === "on" ||
+      outdoorLights === "true" ||
+      outdoorLights === "home" ||
+      Number(outdoorLights) > 0;
 
-      const scene = SceneEngine.create({
+    const scene = SceneEngine.create({
       elevation,
       azimuth,
       weather,
@@ -130,8 +130,11 @@ class WeatherSceneCard extends HTMLElement {
         />
         
         <!-- lamp light passes -->
-        <img class="lamp-pass lamp-bloom" alt="" />
-        <img class="lamp-pass lamp-spill" alt="" />
+        <div class="lamp-composite">
+            <img class="lamp-pass lamp-bloom" alt="" />
+            <img class="lamp-pass lamp-spill" alt="" />
+            <img class="lamp-pass lamp-wash" alt="" />
+        </div>
         
         <!-- vegetation -->
        <!-- <video
@@ -178,9 +181,6 @@ class WeatherSceneCard extends HTMLElement {
           decoding="async"
         />
         
-        <!-- warm wash over pets/floor -->
-        <img class="lamp-pass lamp-wash" alt="" />
-
         <!-- weather effects -->
         <video
           autoplay
