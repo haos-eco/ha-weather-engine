@@ -220,3 +220,10 @@
     left: 0;
   }
 }
+
+@media (min-width: 1440px) {
+  .lamp-bloom {
+      top: -1%;
+      left: -8.4%;
+  }
+}
